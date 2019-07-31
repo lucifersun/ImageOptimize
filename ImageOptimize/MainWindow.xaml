@@ -12,7 +12,7 @@
             <ColumnDefinition Width="523*"/>
             <ColumnDefinition Width="269*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" VerticalAlignment="Top" Width="503" SelectionChanged="ListBox_SelectionChanged" AllowDrop="True" DragEnter="ListBox_DragEnter" Drop="ListBox_Drop">
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="372" Margin="10,10,0,0" VerticalAlignment="Top" Width="503" SelectionChanged="ListBox_SelectionChanged" AllowDrop="True" DragEnter="ListBox_DragEnter" Drop="ListBox_Drop">
             <System:String>将文件拖入</System:String>
         </ListBox>
         <Label x:Name="label" Content="前缀" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
@@ -28,6 +28,7 @@
         <Button x:Name="button" Content="开始" Grid.Column="1" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Click"/>
         <CheckBox x:Name="checkBox" Content="允许自动降低质量" Grid.Column="1" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.486,-3.547" IsChecked="True"/>
         <Button x:Name="button_Copy" Content="清空" Grid.Column="1" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Copy_Click"/>
+        <Label x:Name="label_Copy5" Content="文件大小超过设定值的，不预读宽度，0px为占位符。" HorizontalAlignment="Left" Margin="10,387,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.993,0.468"/>
 
     </Grid>
 </Window>

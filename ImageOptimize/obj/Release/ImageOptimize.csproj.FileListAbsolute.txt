@@ -12,3 +12,4 @@ C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOp
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.csproj.CoreCompileInputs.cache
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.exe
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.pdb
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.csprojAssemblyReference.cache
