@@ -1,0 +1,14 @@
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\bin\Release\ImageOptimize.exe.config
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\bin\Release\ImageOptimize.exe
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\bin\Release\ImageOptimize.pdb
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\MainWindow.g.cs
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\App.g.cs
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize_MarkupCompile.cache
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize_MarkupCompile.lref
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\MainWindow.baml
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.g.resources
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.Properties.Resources.resources
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.csproj.GenerateResource.cache
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.csproj.CoreCompileInputs.cache
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.exe
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Release\ImageOptimize.pdb
