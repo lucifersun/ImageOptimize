@@ -132,9 +132,10 @@ namespace ImageOptimize
                     Fileslist.Quality[i] = ReSize(Fileslist.SrcPath[i], Fileslist.NewPath[i], Convert.ToInt32(targetSize.Text), Convert.ToInt32(targetWidth.Text), Convert.ToInt32(imgQuality.Text), checkBox.IsChecked.Value);
                     Fileslist.STAT[i] = 2;
                 }
-                ListRefresh();
-                SaveReg();
             }
+            
+            ListRefresh();
+            SaveReg();
         }
         private string ReSize(string imgSrcPath,string imgNewPath,long tgtSize,int tgtWidth,long jpgQuality, bool autodown)
         {
