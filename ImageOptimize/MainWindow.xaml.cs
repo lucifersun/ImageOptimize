@@ -234,5 +234,10 @@ namespace ImageOptimize
             rsg.SetValue("checkBox", checkBox.IsChecked);
             rsg.Dispose();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            SaveReg();
+        }
     }
 }
