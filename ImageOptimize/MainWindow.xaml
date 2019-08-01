@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ImageOptimize"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ImageOptimize.MainWindow"
         mc:Ignorable="d"
-        Title="批量图片大小优化" Height="450" Width="800">
+        Title="批量图片大小优化" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid Margin="0,0,2,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="523*"/>

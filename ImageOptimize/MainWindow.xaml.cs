@@ -16,6 +16,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Encoder = System.Drawing.Imaging.Encoder;
+using Microsoft.Win32;
 
 namespace ImageOptimize
 {
@@ -132,6 +133,7 @@ namespace ImageOptimize
                     Fileslist.STAT[i] = 2;
                 }
                 ListRefresh();
+                SaveReg();
             }
         }
         private string ReSize(string imgSrcPath,string imgNewPath,long tgtSize,int tgtWidth,long jpgQuality, bool autodown)
@@ -200,6 +202,37 @@ namespace ImageOptimize
                 }
                 listBox.Items.Add(itemText);
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Registry.CurrentUser.CreateSubKey("Software\\ImageOptimize");
+            RegistryKey rsg = Registry.CurrentUser.OpenSubKey("Software\\ImageOptimize", true);
+            if (rsg.GetValue("targetSize") != null)
+            {
+                targetSize.Text = rsg.GetValue("targetSize").ToString();
+                targetWidth.Text = rsg.GetValue("targetWidth").ToString();
+                imgQuality.Text = rsg.GetValue("imgQuality").ToString();
+                PrefixFileName.Text = rsg.GetValue("PrefixFileName").ToString();
+                checkBox.IsChecked = Convert.ToBoolean(rsg.GetValue("checkBox"));
+                rsg.Dispose();
+            }
+            else
+            {
+                rsg.Dispose();
+                SaveReg();
+            }
+            
+        }
+        private void SaveReg()
+        {
+            RegistryKey rsg = Registry.CurrentUser.OpenSubKey("Software\\ImageOptimize", true);
+            rsg.SetValue("targetSize", targetSize.Text);
+            rsg.SetValue("targetWidth", targetWidth.Text);
+            rsg.SetValue("imgQuality", imgQuality.Text);
+            rsg.SetValue("PrefixFileName", PrefixFileName.Text);
+            rsg.SetValue("checkBox", checkBox.IsChecked);
+            rsg.Dispose();
         }
     }
 }
