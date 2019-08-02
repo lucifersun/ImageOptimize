@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -125,15 +126,23 @@ namespace ImageOptimize
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            for (var i = 0; i < Fileslist.SrcName.Count; i++)
+            Int32 tgtSz = new Int32();
+            tgtSz = Convert.ToInt32(targetSize.Text);
+            Int32 tgtWd = new Int32();
+            tgtWd = Convert.ToInt32(targetWidth.Text);
+            Int32 jpgq = new Int32();
+            jpgq = Convert.ToInt32(imgQuality.Text);
+            bool cb = new bool();
+            cb = checkBox.IsChecked.Value;
+            Parallel.For(0, Fileslist.SrcName.Count, i =>
             {
+
                 if (Fileslist.STAT[i] == 1)
                 {
-                    Fileslist.Quality[i] = ReSize(Fileslist.SrcPath[i], Fileslist.NewPath[i], Convert.ToInt32(targetSize.Text), Convert.ToInt32(targetWidth.Text), Convert.ToInt32(imgQuality.Text), checkBox.IsChecked.Value);
+                    Fileslist.Quality[i] = ReSize(Fileslist.SrcPath[i], Fileslist.NewPath[i], tgtSz, tgtWd, jpgq, cb);
                     Fileslist.STAT[i] = 2;
                 }
-            }
-            
+            });
             ListRefresh();
             SaveReg();
         }
@@ -240,5 +249,6 @@ namespace ImageOptimize
         {
             SaveReg();
         }
+
     }
 }
