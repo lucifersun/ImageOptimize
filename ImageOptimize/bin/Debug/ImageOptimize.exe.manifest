@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImageOptimize.exe" size="18360">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImageOptimize.exe" size="19896">
       <assemblyIdentity name="ImageOptimize" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>JtWybJtm5U8f1bknsLdKE0mnv2UR+hphQx1pKF7RTOs=</dsig:DigestValue>
+        <dsig:DigestValue>2g9Pvvkm762UneMeVw90UG9fhVCQaEkMS1drD/qb7tI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

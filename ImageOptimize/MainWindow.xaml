@@ -12,23 +12,27 @@
             <ColumnDefinition Width="523*"/>
             <ColumnDefinition Width="269*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="372" Margin="10,10,0,0" VerticalAlignment="Top" Width="503" SelectionChanged="ListBox_SelectionChanged" AllowDrop="True" DragEnter="ListBox_DragEnter" Drop="ListBox_Drop">
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="372" Margin="10,10,0,0" VerticalAlignment="Top" Width="503" AllowDrop="True" DragEnter="ListBox_DragEnter" Drop="ListBox_Drop">
             <System:String>将文件拖入</System:String>
         </ListBox>
         <Label x:Name="label" Content="前缀" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
-        <TextBox x:Name="PrefixFileName" HorizontalAlignment="Left" Height="23" Margin="49,10,0,0" TextWrapping="Wrap" Text="Re_" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-        <Label x:Name="label_Copy" Content="目标大小" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
-        <TextBox x:Name="targetSize" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="73,102,0,0" TextWrapping="Wrap" Text="900" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
-        <Label x:Name="label_Copy1" Content="KB" HorizontalAlignment="Left" Margin="174,100,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
-        <Label x:Name="label_Copy2" Content="宽度" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
-        <TextBox x:Name="targetWidth" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="73,132,0,0" TextWrapping="Wrap" Text="980" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
-        <Label x:Name="label_Copy3" Content="像素" HorizontalAlignment="Left" Margin="174,130,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
-        <Label x:Name="label_Copy4" Content="jpeg质量" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
-        <TextBox x:Name="imgQuality" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="74,164,0,0" TextWrapping="Wrap" Text="95" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
-        <Button x:Name="button" Content="开始" Grid.Column="1" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Click"/>
-        <CheckBox x:Name="checkBox" Content="允许自动降低质量" Grid.Column="1" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.486,-3.547" IsChecked="True"/>
-        <Button x:Name="button_Copy" Content="清空" Grid.Column="1" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Copy_Click"/>
+        <TextBox x:Name="PrefixFileName" HorizontalAlignment="Left" Height="23" Margin="50,10,0,0" TextWrapping="Wrap" Text="Re_" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <Label x:Name="label_Copy" Content="目标大小" HorizontalAlignment="Left" Margin="10,167,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
+        <TextBox x:Name="targetSize" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="73,169,0,0" TextWrapping="Wrap" Text="900" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
+        <Label x:Name="label_Copy1" Content="KB" HorizontalAlignment="Left" Margin="174,197,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
+        <Label x:Name="label_Copy2" Content="宽度" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
+        <TextBox x:Name="targetWidth" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="73,199,0,0" TextWrapping="Wrap" Text="980" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
+        <Label x:Name="label_Copy3" Content="像素" HorizontalAlignment="Left" Margin="174,167,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
+        <Label x:Name="label_Copy4" Content="jpeg质量" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
+        <TextBox x:Name="imgQuality" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="74,229,0,0" TextWrapping="Wrap" Text="95" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
+        <Button x:Name="buttonStart" Content="开始" Grid.Column="1" HorizontalAlignment="Left" Margin="10,301,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Click"/>
+        <CheckBox x:Name="checkBox" Content="允许自动降低质量" Grid.Column="1" HorizontalAlignment="Left" Margin="10,268,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.486,-3.547" IsChecked="True"/>
+        <Button x:Name="buttonClear" Content="清空" Grid.Column="1" HorizontalAlignment="Left" Margin="10,354,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Copy_Click"/>
         <Label x:Name="label_Copy5" Content="文件大小超过设定值的，不预读宽度，0px为占位符。" HorizontalAlignment="Left" Margin="10,387,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.993,0.468"/>
+        <RadioButton x:Name="radioButton" Content="保存在同文件夹" Grid.Column="1" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" IsChecked="True" Click="RadioButton_Click"/>
+        <RadioButton x:Name="radioButton1" Content="保存到新位置" Grid.Column="1" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Checked="RadioButton1_Checked"/>
+        <TextBox x:Name="newfoldBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" IsEnabled="False"/>
+        <Button x:Name="buttonFold" Content="浏览" Grid.Column="1" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="ButtonFold_Click" IsEnabled="False"/>
 
     </Grid>
 </Window>

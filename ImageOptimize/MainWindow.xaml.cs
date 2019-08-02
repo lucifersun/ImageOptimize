@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -31,15 +32,15 @@ namespace ImageOptimize
             InitializeComponent();
         }
 
-        private void ListBox_DragEnter(object sender, DragEventArgs e)
+        private void ListBox_DragEnter(object sender, System.Windows.DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))
             {
-                e.Effects = DragDropEffects.Link;
+                e.Effects = System.Windows.DragDropEffects.Link;
             }
             else
             {
-                e.Effects = DragDropEffects.None;
+                e.Effects = System.Windows.DragDropEffects.None;
             }
         }
 
@@ -56,26 +57,22 @@ namespace ImageOptimize
             public static List<string> Quality = new List<string>();//最终jpg质量
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
-
-        private void ListBox_Drop(object sender, DragEventArgs e)
+        private void ListBox_Drop(object sender, System.Windows.DragEventArgs e)
         {
             string[] DragFileNames;
-            DragFileNames = e.Data.GetData(DataFormats.FileDrop, false) as String[];
+            DragFileNames = e.Data.GetData(System.Windows.DataFormats.FileDrop, false) as string[];
             string[] supportExt = new string[] { ".jpg", ".jpeg", ".png", ".bmp" };
             System.Drawing.Image imgFile;
             foreach (string DragFileName in DragFileNames)
             {
                 //仅允许文件类型相符且文件路径无重复
-                if (supportExt.Contains(System.IO.Path.GetExtension(DragFileName).ToLower()) && (!(Fileslist.SrcPath.Contains(DragFileName))))
+                if (supportExt.Contains(System.IO.Path.GetExtension(DragFileName).ToLower()) && (!Fileslist.SrcPath.Contains(DragFileName)))
                 {
                     Fileslist.SrcPath.Add(DragFileName);//写入源路径
                     Fileslist.SrcName.Add(System.IO.Path.GetFileName(DragFileName));//写入源文件名
-                    Fileslist.NewPath.Add(System.IO.Path.GetDirectoryName(Fileslist.SrcPath.Last())+"\\"+ PrefixFileName.Text + Fileslist.SrcName.Last());//写入新路径+前缀
-                    Fileslist.Size.Add(new System.IO.FileInfo(DragFileName).Length / 1024);
+                    Fileslist.NewPath.Add(System.IO.Path.GetDirectoryName(Fileslist.SrcPath.Last()) + "\\" + PrefixFileName.Text + Fileslist.SrcName.Last());//写入源路径+前缀，同位置保存
+                    Fileslist.Size.Add(new FileInfo(DragFileName).Length / 1024);
                     //文件体积小于限定的，读取宽高像素；大体积直接略过，写入0
                     if (Fileslist.Size.Last() <= Convert.ToInt32(targetSize.Text))
                     {
@@ -126,17 +123,22 @@ namespace ImageOptimize
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Int32 tgtSz = new Int32();
-            tgtSz = Convert.ToInt32(targetSize.Text);
-            Int32 tgtWd = new Int32();
-            tgtWd = Convert.ToInt32(targetWidth.Text);
-            Int32 jpgq = new Int32();
-            jpgq = Convert.ToInt32(imgQuality.Text);
-            bool cb = new bool();
-            cb = checkBox.IsChecked.Value;
+            //读取参数
+            long tgtSz = Convert.ToInt32(targetSize.Text);
+            int tgtWd = Convert.ToInt32(targetWidth.Text);
+            long jpgq = Convert.ToInt32(imgQuality.Text);
+            bool cb = checkBox.IsChecked.Value;
+            
+            //如果选择使用新文件夹
+            if (radioButton1.IsChecked==true)
+            {
+                string NewFold = newfoldBox.Text;
+                string preFileName = PrefixFileName.Text;
+                Parallel.For(0, Fileslist.SrcName.Count, i => Fileslist.NewPath[i] = NewFold + "\\" + preFileName + Fileslist.SrcName[i]);
+            }
             Parallel.For(0, Fileslist.SrcName.Count, i =>
             {
-
+                //调整标记为1的项
                 if (Fileslist.STAT[i] == 1)
                 {
                     Fileslist.Quality[i] = ReSize(Fileslist.SrcPath[i], Fileslist.NewPath[i], tgtSz, tgtWd, jpgq, cb);
@@ -146,7 +148,12 @@ namespace ImageOptimize
             ListRefresh();
             SaveReg();
         }
-        private string ReSize(string imgSrcPath,string imgNewPath,long tgtSize,int tgtWidth,long jpgQuality, bool autodown)
+        private string ReSize(string imgSrcPath,
+                              string imgNewPath,
+                              long tgtSize,
+                              int tgtWidth,
+                              long jpgQuality,
+                              bool autodown)
         {
             System.Drawing.Bitmap srcFile = new Bitmap(imgSrcPath);
             int imgWidth = tgtWidth;
@@ -163,7 +170,6 @@ namespace ImageOptimize
             myImageCodecInfo = GetEncoderInfo("image/jpeg");
             myEncoder = Encoder.Quality;
             myEncoderParameters = new EncoderParameters(1);
-            //long newFileSize;
             do
             {
                 myEncoderParameter = new EncoderParameter(myEncoder, jpgQuality);
@@ -194,7 +200,7 @@ namespace ImageOptimize
         {
             listBox.Items.Clear();
             string itemText;
-            for (var i = 0; i < Fileslist.SrcName.Count; i++)
+            for (int i = 0; i < Fileslist.SrcName.Count; i++)
             {
                 itemText = Fileslist.SrcName[i] + "......" + Fileslist.Size[i].ToString() + "KB" + "......" + Fileslist.Width[i] + " px";
                 if (Fileslist.STAT[i] == 0)
@@ -218,7 +224,11 @@ namespace ImageOptimize
         {
             Registry.CurrentUser.CreateSubKey("Software\\ImageOptimize");
             RegistryKey rsg = Registry.CurrentUser.OpenSubKey("Software\\ImageOptimize", true);
-            if (rsg.GetValue("targetSize") != null)
+            if (rsg.GetValue("targetSize") != null && 
+                rsg.GetValue("targetWidth") != null && 
+                rsg.GetValue("imgQuality") != null && 
+                rsg.GetValue("PrefixFileName") != null && 
+                rsg.GetValue("checkBox") != null)
             {
                 targetSize.Text = rsg.GetValue("targetSize").ToString();
                 targetWidth.Text = rsg.GetValue("targetWidth").ToString();
@@ -250,5 +260,31 @@ namespace ImageOptimize
             SaveReg();
         }
 
+        private void RadioButton1_Checked(object sender, RoutedEventArgs e)
+        {
+            newfoldBox.IsEnabled = true;
+            buttonFold.IsEnabled = true;
+            
+            
+        }
+
+        private void ButtonFold_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog
+            {
+                Description = "请选择文件路径"
+            };
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                newfoldBox.Text = dialog.SelectedPath;
+            }
+        }
+
+
+        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            newfoldBox.IsEnabled = false;
+            buttonFold.IsEnabled = false;
+        }
     }
 }
