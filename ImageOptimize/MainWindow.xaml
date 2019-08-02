@@ -19,10 +19,10 @@
         <TextBox x:Name="PrefixFileName" HorizontalAlignment="Left" Height="23" Margin="50,10,0,0" TextWrapping="Wrap" Text="Re_" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
         <Label x:Name="label_Copy" Content="目标大小" HorizontalAlignment="Left" Margin="10,167,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
         <TextBox x:Name="targetSize" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="73,169,0,0" TextWrapping="Wrap" Text="900" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
-        <Label x:Name="label_Copy1" Content="KB" HorizontalAlignment="Left" Margin="174,197,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
+        <Label x:Name="label_Copy1" Content="KB" HorizontalAlignment="Left" Margin="174,167,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
         <Label x:Name="label_Copy2" Content="宽度" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
         <TextBox x:Name="targetWidth" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="73,199,0,0" TextWrapping="Wrap" Text="980" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
-        <Label x:Name="label_Copy3" Content="像素" HorizontalAlignment="Left" Margin="174,167,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
+        <Label x:Name="label_Copy3" Content="像素" HorizontalAlignment="Left" Margin="174,197,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
         <Label x:Name="label_Copy4" Content="jpeg质量" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.993,0.468"/>
         <TextBox x:Name="imgQuality" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="74,229,0,0" TextWrapping="Wrap" Text="95" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
         <Button x:Name="buttonStart" Content="开始" Grid.Column="1" HorizontalAlignment="Left" Margin="10,301,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Click"/>
