@@ -132,6 +132,20 @@ namespace ImageOptimize
             //如果选择使用新文件夹
             if (radioButton1.IsChecked==true)
             {
+                //检查文件名是否有重复，避免不同文件夹内有同名文件
+                string tempFileName = null;
+                for(int i = 0; i<Fileslist.SrcName.Count; i++)
+                {
+                    tempFileName = Fileslist.SrcName[i];
+                    Fileslist.SrcName[i] = "";
+                    if (Fileslist.SrcName.Contains(tempFileName))
+                    {
+                        tempFileName = System.IO.Path.GetFileNameWithoutExtension(tempFileName) + "_"+i.ToString() + System.IO.Path.GetExtension(Fileslist.SrcPath[i]);
+                    }
+                    Fileslist.SrcName[i] = tempFileName;
+                }
+
+
                 string NewFold = newfoldBox.Text;
                 string preFileName = PrefixFileName.Text;
                 Parallel.For(0, Fileslist.SrcName.Count, i => Fileslist.NewPath[i] = NewFold + "\\" + preFileName + Fileslist.SrcName[i]);
