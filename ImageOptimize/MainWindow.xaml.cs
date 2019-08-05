@@ -63,6 +63,20 @@ namespace ImageOptimize
             System.Drawing.Image imgFile;
             foreach (string DragFileName in DragFileNames)
             {
+                //判断是否文件夹
+                if (System.IO.Directory.Exists(DragFileName))
+                {
+                    //文件夹
+                    if ((bool)subFolder_checkBox.IsChecked)
+                    {
+                        FilesListLoad(Directory.GetFileSystemEntries(DragFileName));
+                    }
+                    else
+                    {
+                        FilesListLoad(Directory.GetFiles(DragFileName));
+                    }
+                    
+                }
                 //仅允许文件类型相符且文件路径无重复
                 if (supportExt.Contains(System.IO.Path.GetExtension(DragFileName).ToLower()) && (!Fileslist.SrcPath.Contains(DragFileName)))
                 {
@@ -111,6 +125,7 @@ namespace ImageOptimize
         {
             ListDel();
             listBox.Items.Clear();
+            buttonStart.IsEnabled = false;
         }
 
         private void ListDel()
@@ -236,6 +251,14 @@ namespace ImageOptimize
                 }
                 listBox.Items.Add(itemText);
             }
+            if (Fileslist.STAT.Contains(1))
+            {
+                buttonStart.IsEnabled = true;
+            }
+            else
+            {
+                buttonStart.IsEnabled = false;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -260,7 +283,13 @@ namespace ImageOptimize
                 rsg.Dispose();
                 SaveReg();
             }
-            
+            //检查剪贴板内是否文件路径
+            if (System.Windows.Clipboard.ContainsFileDropList())
+            {
+                buttonPaste.IsEnabled = true;
+            }
+
+
         }
         private void SaveReg()
         {
@@ -303,6 +332,42 @@ namespace ImageOptimize
         {
             newfoldBox.IsEnabled = false;
             buttonFold.IsEnabled = false;
+        }
+
+        private void ButtonPaste_Click(object sender, RoutedEventArgs e)
+        {
+            if (System.Windows.Clipboard.ContainsFileDropList()){
+                string[] tempDragFileNames=new string[System.Windows.Clipboard.GetFileDropList().Count];
+                System.Windows.Clipboard.GetFileDropList().CopyTo(tempDragFileNames,0);
+                FilesListLoad(tempDragFileNames);
+                ListRefresh();
+            }
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            //检查剪贴板内是否文件路径
+            if (System.Windows.Clipboard.ContainsFileDropList())
+            {
+                buttonPaste.IsEnabled = true;
+            }
+        }
+
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog
+            {
+                Multiselect = true,
+                CheckPathExists = true,
+                CheckFileExists = true,
+                Filter = "Image Files(*.jpg;*.jpeg;*.bmp;*.png)|*.BMP;*.JPG;*.JPEG,*.PNG"
+            };
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string[] tempDragFileNames=openFileDialog.FileNames;
+                FilesListLoad(tempDragFileNames);
+                ListRefresh();
+            }
         }
     }
 }

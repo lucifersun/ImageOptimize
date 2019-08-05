@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ImageOptimize"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ImageOptimize.MainWindow"
         mc:Ignorable="d"
-        Title="批量图片大小优化" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="批量图片大小优化" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated">
     <Grid Margin="0,0,2,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="399*"/>
@@ -26,14 +26,17 @@
         <Label x:Name="label_Copy3" Content="像素" HorizontalAlignment="Left" Margin="174,197,0,0" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="-0.993,0.468"/>
         <Label x:Name="label_Copy4" Content="jpeg质量" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="-0.993,0.468"/>
         <TextBox x:Name="imgQuality" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="74,229,0,0" TextWrapping="Wrap" Text="95" VerticalAlignment="Top" Width="96" TextAlignment="Right"/>
-        <Button x:Name="buttonStart" Content="开始" Grid.Column="2" HorizontalAlignment="Left" Margin="10,301,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Click"/>
+        <Button x:Name="buttonStart" Content="开始" Grid.Column="2" HorizontalAlignment="Left" Margin="69,301,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Click" IsEnabled="False"/>
         <CheckBox x:Name="checkBox" Content="允许自动降低质量" Grid.Column="2" HorizontalAlignment="Left" Margin="10,268,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.486,-3.547" IsChecked="True"/>
-        <Button x:Name="buttonClear" Content="清空" Grid.Column="2" HorizontalAlignment="Left" Margin="10,354,0,0" VerticalAlignment="Top" Width="189" Height="48" Click="Button_Copy_Click"/>
+        <Button x:Name="buttonClear" Content="清空" Grid.Column="2" HorizontalAlignment="Left" Margin="166,354,0,0" VerticalAlignment="Top" Width="92" Height="48" Click="Button_Copy_Click"/>
         <Label x:Name="label_Copy5" Content="文件大小超过设定值的，不预读宽度，0px为占位符。" HorizontalAlignment="Left" Margin="10,387,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.993,0.468"/>
         <RadioButton x:Name="radioButton" Content="保存在同文件夹" Grid.Column="2" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" IsChecked="True" Click="RadioButton_Click"/>
         <RadioButton x:Name="radioButton1" Content="保存到新位置" Grid.Column="2" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Checked="RadioButton1_Checked"/>
         <TextBox x:Name="newfoldBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" IsEnabled="False"/>
         <Button x:Name="buttonFold" Content="浏览" Grid.Column="2" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="ButtonFold_Click" IsEnabled="False"/>
+        <CheckBox x:Name="subFolder_checkBox" Content="包含子文件夹" HorizontalAlignment="Left" Margin="22,387,0,0" VerticalAlignment="Top" Grid.Column="1" IsChecked="True"/>
+        <Button x:Name="buttonAdd" Content="添加" Grid.Column="2" HorizontalAlignment="Left" Margin="10,301,0,0" VerticalAlignment="Top" Width="54" Height="101" Click="ButtonAdd_Click"/>
+        <Button x:Name="buttonPaste" Content="粘贴" Grid.Column="2" HorizontalAlignment="Left" Margin="69,354,0,0" VerticalAlignment="Top" Width="92" Height="48" Click="ButtonPaste_Click" IsEnabled="False"/>
 
     </Grid>
 </Window>
