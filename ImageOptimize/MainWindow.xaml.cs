@@ -57,11 +57,8 @@ namespace ImageOptimize
             public static List<string> Quality = new List<string>();//最终jpg质量
         }
 
-
-        private void ListBox_Drop(object sender, System.Windows.DragEventArgs e)
+        private void FilesListLoad(string[] DragFileNames)
         {
-            string[] DragFileNames;
-            DragFileNames = e.Data.GetData(System.Windows.DataFormats.FileDrop, false) as string[];
             string[] supportExt = new string[] { ".jpg", ".jpeg", ".png", ".bmp" };
             System.Drawing.Image imgFile;
             foreach (string DragFileName in DragFileNames)
@@ -98,6 +95,13 @@ namespace ImageOptimize
                     Fileslist.Quality.Add("");
                 }
             }
+        }
+        private void ListBox_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            string[] tempDragFileNames = e.Data.GetData(System.Windows.DataFormats.FileDrop, false) as string[];
+            FilesListLoad(tempDragFileNames);
+
+
             ListRefresh();
             
             //ProgressBar01.Value = ProgressBar01.Maximum;
