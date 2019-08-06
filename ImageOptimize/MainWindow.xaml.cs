@@ -57,9 +57,10 @@ namespace ImageOptimize
             public static List<string> Quality = new List<string>();//最终jpg质量
         }
 
-        private void FilesListLoad(string[] DragFileNames)
+        private int FilesListLoad(string[] DragFileNames)
         {
             string[] supportExt = new string[] { ".jpg", ".jpeg", ".png", ".bmp" };
+            int fileCount = 0;
             System.Drawing.Image imgFile;
             foreach (string DragFileName in DragFileNames)
             {
@@ -69,17 +70,18 @@ namespace ImageOptimize
                     //文件夹
                     if ((bool)subFolder_checkBox.IsChecked)
                     {
-                        FilesListLoad(Directory.GetFileSystemEntries(DragFileName));
+                        fileCount += FilesListLoad(Directory.GetFileSystemEntries(DragFileName));
                     }
                     else
                     {
-                        FilesListLoad(Directory.GetFiles(DragFileName));
+                        fileCount += FilesListLoad(Directory.GetFiles(DragFileName));
                     }
                     
                 }
                 //仅允许文件类型相符且文件路径无重复
                 if (supportExt.Contains(System.IO.Path.GetExtension(DragFileName).ToLower()) && (!Fileslist.SrcPath.Contains(DragFileName)))
                 {
+                    fileCount++;
                     Fileslist.SrcPath.Add(DragFileName);//写入源路径
                     Fileslist.SrcName.Add(System.IO.Path.GetFileName(DragFileName));//写入源文件名
                     Fileslist.NewPath.Add(System.IO.Path.GetDirectoryName(Fileslist.SrcPath.Last()) + "\\" + PrefixFileName.Text + Fileslist.SrcName.Last());//写入源路径+前缀，同位置保存
@@ -109,13 +111,13 @@ namespace ImageOptimize
                     Fileslist.Quality.Add("");
                 }
             }
+            return fileCount;
         }
         private void ListBox_Drop(object sender, System.Windows.DragEventArgs e)
         {
             string[] tempDragFileNames = e.Data.GetData(System.Windows.DataFormats.FileDrop, false) as string[];
-            FilesListLoad(tempDragFileNames);
-
-
+            int fileCount= FilesListLoad(tempDragFileNames);
+            labelfileCount.Content = "拖拽导入 " + fileCount.ToString() + " 个文件，合计 " + Fileslist.SrcName.Count.ToString();
             ListRefresh();
             
             //ProgressBar01.Value = ProgressBar01.Maximum;
@@ -339,7 +341,8 @@ namespace ImageOptimize
             if (System.Windows.Clipboard.ContainsFileDropList()){
                 string[] tempDragFileNames=new string[System.Windows.Clipboard.GetFileDropList().Count];
                 System.Windows.Clipboard.GetFileDropList().CopyTo(tempDragFileNames,0);
-                FilesListLoad(tempDragFileNames);
+                int fileCount = FilesListLoad(tempDragFileNames);
+                labelfileCount.Content = "剪贴板导入 " + fileCount.ToString() + " 个文件，合计 "+Fileslist.SrcName.Count.ToString();
                 ListRefresh();
             }
         }
@@ -365,7 +368,8 @@ namespace ImageOptimize
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string[] tempDragFileNames=openFileDialog.FileNames;
-                FilesListLoad(tempDragFileNames);
+                int fileCount= FilesListLoad(tempDragFileNames);
+                labelfileCount.Content = "添加 " + fileCount.ToString() + " 个文件，合计 " + Fileslist.SrcName.Count.ToString();
                 ListRefresh();
             }
         }
