@@ -217,6 +217,7 @@ namespace ImageOptimize
             
             
             newFile.Dispose();
+            myEncoderParameters.Dispose();
             return (jpgQuality + 5).ToString();
         }
         private static ImageCodecInfo GetEncoderInfo(String mimeType)
@@ -327,6 +328,7 @@ namespace ImageOptimize
             {
                 newfoldBox.Text = dialog.SelectedPath;
             }
+            dialog.Dispose();
         }
 
 
@@ -372,6 +374,7 @@ namespace ImageOptimize
                 labelfileCount.Content = "添加 " + fileCount.ToString() + " 个文件，合计 " + Fileslist.SrcName.Count.ToString();
                 ListRefresh();
             }
+            openFileDialog.Dispose();
         }
     }
 }
