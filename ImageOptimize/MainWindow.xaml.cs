@@ -53,7 +53,7 @@ namespace ImageOptimize
             public static List<int> Width = new List<int>();//宽度
             public static List<int> Height = new List<int>();//高度
             public static List<string> NewPath = new List<string>();//新路径
-            public static List<int> STAT = new List<int>();//0不调整,1待调整,2已调整
+            public static List<int> STAT = new List<int>();//0不调整,1待调整,2已调整,3待扫描
             public static List<string> Quality = new List<string>();//最终jpg质量
         }
 
@@ -85,29 +85,10 @@ namespace ImageOptimize
                     Fileslist.SrcPath.Add(DragFileName);//写入源路径
                     Fileslist.SrcName.Add(System.IO.Path.GetFileName(DragFileName));//写入源文件名
                     Fileslist.NewPath.Add(System.IO.Path.GetDirectoryName(Fileslist.SrcPath.Last()) + "\\" + PrefixFileName.Text + Fileslist.SrcName.Last());//写入源路径+前缀，同位置保存
-                    Fileslist.Size.Add(new FileInfo(DragFileName).Length / 1024);
-                    //文件体积小于限定的，读取宽高像素；大体积直接略过，写入0
-                    if (Fileslist.Size.Last() <= Convert.ToInt32(targetSize.Text))
-                    {
-                        imgFile = new Bitmap(DragFileName);
-                        Fileslist.Width.Add(imgFile.Width);
-                        Fileslist.Height.Add(imgFile.Height);
-                        imgFile.Dispose();
-                    }
-                    else
-                    {
-                        Fileslist.Width.Add(0);
-                        Fileslist.Height.Add(0);
-                    }
-                    //体积或宽度超限，标记1 待调整
-                    if (Fileslist.Size.Last() > Convert.ToInt32(targetSize.Text) || Fileslist.Width.Last() > Convert.ToInt32(targetWidth.Text))
-                    {
-                        Fileslist.STAT.Add(1);
-                    }
-                    else
-                    {
-                        Fileslist.STAT.Add(0);
-                    }
+                    Fileslist.Size.Add(0);
+                    Fileslist.Width.Add(0);
+                    Fileslist.Height.Add(0);
+                    Fileslist.STAT.Add(3);
                     Fileslist.Quality.Add("");
                 }
             }
@@ -118,6 +99,7 @@ namespace ImageOptimize
             string[] tempDragFileNames = e.Data.GetData(System.Windows.DataFormats.FileDrop, false) as string[];
             int fileCount= FilesListLoad(tempDragFileNames);
             labelfileCount.Content = "拖拽导入 " + fileCount.ToString() + " 个文件，合计 " + Fileslist.SrcName.Count.ToString();
+            FileInfoRefresh();
             ListRefresh();
             
             //ProgressBar01.Value = ProgressBar01.Maximum;
@@ -232,6 +214,31 @@ namespace ImageOptimize
             }
             return null;
         }
+        private void FileInfoRefresh()
+        {
+            long maxFileSize,maxWidth;
+            maxFileSize = Convert.ToInt32(targetSize.Text);
+            maxWidth = Convert.ToInt32(targetWidth.Text);
+            Parallel.For(0, Fileslist.SrcName.Count, i =>
+            {
+                if (Fileslist.STAT[i]==3)
+                {
+                    Fileslist.Size[i] = new FileInfo(Fileslist.SrcPath[i]).Length / 1024;
+                    System.Drawing.Image imgFile = new Bitmap(Fileslist.SrcPath[i]);
+                    Fileslist.Width[i] = imgFile.Width;
+                    Fileslist.Height[i] = imgFile.Height;
+                    imgFile.Dispose();
+                    if (Fileslist.Size[i]>maxFileSize || Fileslist.Width[i]>maxWidth)
+                    {
+                        Fileslist.STAT[i] = 1;
+                    }
+                    else
+                    {
+                        Fileslist.STAT[i] = 0;
+                    }
+                }
+            });
+        }
         private void ListRefresh()
         {
             listBox.Items.Clear();
@@ -345,6 +352,7 @@ namespace ImageOptimize
                 System.Windows.Clipboard.GetFileDropList().CopyTo(tempDragFileNames,0);
                 int fileCount = FilesListLoad(tempDragFileNames);
                 labelfileCount.Content = "剪贴板导入 " + fileCount.ToString() + " 个文件，合计 "+Fileslist.SrcName.Count.ToString();
+                FileInfoRefresh();
                 ListRefresh();
             }
         }
@@ -372,6 +380,7 @@ namespace ImageOptimize
                 string[] tempDragFileNames=openFileDialog.FileNames;
                 int fileCount= FilesListLoad(tempDragFileNames);
                 labelfileCount.Content = "添加 " + fileCount.ToString() + " 个文件，合计 " + Fileslist.SrcName.Count.ToString();
+                FileInfoRefresh();
                 ListRefresh();
             }
             openFileDialog.Dispose();

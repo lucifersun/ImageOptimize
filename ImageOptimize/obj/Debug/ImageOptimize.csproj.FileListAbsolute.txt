@@ -40,7 +40,6 @@ C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\MainWindo
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\ImageOptimize.g.resources
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\ImageOptimize.Properties.Resources.resources
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\ImageOptimize.csproj.GenerateResource.cache
-C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\ImageOptimize.csproj.CoreCompileInputs.cache
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\ImageOptimize.exe
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\ImageOptimize.pdb
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\bin\Debug\ImageOptimize.exe.manifest
