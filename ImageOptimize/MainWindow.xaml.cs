@@ -61,7 +61,6 @@ namespace ImageOptimize
         {
             string[] supportExt = new string[] { ".jpg", ".jpeg", ".png", ".bmp" };
             int fileCount = 0;
-            System.Drawing.Image imgFile;
             foreach (string DragFileName in DragFileNames)
             {
                 //判断是否文件夹
@@ -195,7 +194,7 @@ namespace ImageOptimize
                 newFile.Save(imgNewPath, myImageCodecInfo, myEncoderParameters);
                 jpgQuality -= 5;
                 
-            }while (autodown && (new System.IO.FileInfo(imgNewPath).Length / 1024) > tgtSize);
+            }while (autodown && jpgQuality>=5 && (new System.IO.FileInfo(imgNewPath).Length / 1024) > tgtSize);
             
             
             newFile.Dispose();
@@ -264,10 +263,12 @@ namespace ImageOptimize
             if (Fileslist.STAT.Contains(1))
             {
                 buttonStart.IsEnabled = true;
+                buttonCalc.IsEnabled = true;
             }
             else
             {
                 buttonStart.IsEnabled = false;
+                buttonCalc.IsEnabled = false;
             }
         }
 
@@ -384,6 +385,11 @@ namespace ImageOptimize
                 ListRefresh();
             }
             openFileDialog.Dispose();
+        }
+
+        private void buttonCalc_Click(object sender, RoutedEventArgs e)
+        {
+            targetSize.Text = (Convert.ToInt32(totalSize.Text)/Fileslist.SrcName.Count).ToString();
         }
     }
 }

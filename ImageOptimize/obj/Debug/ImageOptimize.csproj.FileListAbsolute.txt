@@ -46,3 +46,4 @@ C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\bin\Debug\ImageOpti
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\bin\Debug\ImageOptimize.application
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\ImageOptimize.exe.manifest
 C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\ImageOptimize.application
+C:\Users\SunLin\Documents\GitHub\ImageOptimize\ImageOptimize\obj\Debug\ImageOptimize.csproj.CoreCompileInputs.cache
